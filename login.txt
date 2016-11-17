@@ -1,0 +1,45 @@
+#include <FL/Fl.H>
+#include <FL/Fl_Window.H>
+#include <FL/Fl_Box.H>
+#include <FL/Fl_Menu_Bar.H>
+#include <FL/Fl_Input.H>
+#include <FL/Fl_Multiline_Input.H>
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Return_Button.H>
+#include <iostream>
+#include <string>
+#include <conio.h>
+#include <stdio.h>
+
+using namespace std;
+
+Fl_Window *win;
+Fl_Input *rp_user,*rp_pass;
+
+void create_robot_partCB(Fl_Widget* w, void* p) { // Replace with call to model!
+	win->hide();
+	cout << "User Id " << rp_user->value();
+	cout << "Password "<< rp_pass->value();
+	
+	win->show(); // hide this
+	}
+
+int main()
+{
+	
+	win = new Fl_Window{ 350, 200, "Login" };
+	
+	rp_user = new Fl_Input(90, 40, 210, 25, "User Name");
+	rp_user->align(FL_ALIGN_LEFT);
+	rp_pass = new Fl_Input(90, 70, 210, 25, "Password");
+	rp_pass->align(FL_ALIGN_LEFT);
+	
+	Fl_Return_Button *rp_login;
+	rp_login = new Fl_Return_Button(100, 100, 120, 25, "Login");
+	rp_login->callback((Fl_Callback *)create_robot_partCB, 0);
+	
+	win->end();
+	win->show();
+	
+	return Fl::run();
+}
